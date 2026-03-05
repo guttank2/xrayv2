@@ -1,7 +1,9 @@
 // XRay Background Service Worker
 // Handles badge updates, notifications, and LLM analysis webhook
 
-const WEBHOOK_URL = 'https://n8n.brainrot.marketing/webhook/xray-webhook';
+// WEBHOOK_URL is loaded from config.js (git-ignored)
+// Copy config.example.js → config.js and set your n8n webhook URL
+importScripts('config.js');
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'setBadge') {

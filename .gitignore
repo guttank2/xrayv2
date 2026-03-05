@@ -1,3 +1,6 @@
+# ===== Private config (contains webhook URL) =====
+config.js
+
 # ===== n8n workflows (contain credentials & secrets) =====
 files/
 files.zip
