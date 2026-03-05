@@ -1511,13 +1511,38 @@ li { margin-bottom: 4px; }
   color: #888;
 }
 
-.keyword-pill:nth-child(-n+3) {
+/* Topic type styling — semantic topics get visual distinction */
+.keyword-pill.topic-hashtag {
   background: #000;
   color: #fff;
+  border-color: #000;
+}
+.keyword-pill.topic-hashtag .keyword-count {
+  color: #aaa;
 }
 
-.keyword-pill:nth-child(-n+3) .keyword-count {
+.keyword-pill.topic-entity {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+.keyword-pill.topic-entity .keyword-count {
   color: #aaa;
+}
+
+.keyword-pill.topic-phrase {
+  background: #f0f0f0;
+  color: #000;
+  border-color: #000;
+}
+
+.keyword-pill.topic-keyword {
+  background: #fff;
+  color: #000;
+  border-color: #ccc;
+}
+.keyword-pill.topic-keyword .keyword-count {
+  color: #999;
 }
 
 /* Viral post cards */

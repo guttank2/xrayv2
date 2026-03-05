@@ -833,12 +833,15 @@ function renderTrendKeywords(keywords) {
     return;
   }
   document.getElementById('trendsKeywords').style.display = 'block';
-  container.innerHTML = keywords.map(kw =>
-    '<span class="keyword-pill">'
-    + esc(kw.word)
-    + '<span class="keyword-count">' + kw.count + '</span>'
-    + '</span>'
-  ).join('');
+  container.innerHTML = keywords.map(kw => {
+    const topicType = kw.type || 'keyword';
+    const typeClass = 'topic-' + topicType;
+    const velText = kw.avgVel ? ' · ' + formatNum(kw.avgVel) + '/h' : '';
+    return '<span class="keyword-pill ' + typeClass + '">'
+      + esc(kw.word)
+      + '<span class="keyword-count">' + kw.count + velText + '</span>'
+      + '</span>';
+  }).join('');
 }
 
 function renderTrendTopPosts(posts, maxEng, maxVelocity) {
