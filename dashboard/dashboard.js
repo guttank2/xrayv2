@@ -38,7 +38,7 @@ async function loadHistory() {
       : 'avg ' + (entry.avgScore || 0);
     return '<div class="history-item" data-index="' + i + '" data-key="' + entry.key + '">'
       + '<div>'
-      + '<span class="history-account">' + (isTrend ? '' : '@') + (entry.account || 'unknown') + '</span>'
+      + '<span class="history-account">' + (isTrend ? '' : '@') + ((entry.account || 'unknown').replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())) + '</span>'
       + modeBadge
       + '<span class="history-meta"> &mdash; ' + date + '</span>'
       + '</div>'
@@ -796,7 +796,8 @@ async function loadTrendScan(key) {
   // Show trends content, hide empty state
   document.getElementById('trendsEmpty').style.display = 'none';
   document.getElementById('trendsContent').style.display = 'block';
-  document.getElementById('trendsTitle').textContent = 'Trend Scanner — ' + account;
+  const displayAccount = account.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  document.getElementById('trendsTitle').textContent = 'Trend Scanner — ' + displayAccount;
 
   // Summary row
   const summaryEl = document.getElementById('trendsSummary');

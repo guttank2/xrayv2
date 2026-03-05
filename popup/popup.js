@@ -78,9 +78,16 @@ const NON_PROFILE = ['home', 'explore', 'search', 'notifications', 'messages', '
 function detectPage(url) {
   try {
     const u = new URL(url);
-    const path = u.pathname;
+    const path = u.pathname.toLowerCase();
+    // /i/ paths: trending, global-trending, connect, etc.
+    if (path.startsWith('/i/')) {
+      if (path.includes('trending') || path.includes('global-trending')) {
+        return { type: 'trending', account: null };
+      }
+      return { type: 'i', account: null };
+    }
     // Profile page: /username or /username/with_replies etc
-    const match = path.match(/^\/([a-zA-Z0-9_]+)(\/.*)?$/);
+    const match = u.pathname.match(/^\/([a-zA-Z0-9_]+)(\/.*)?$/);
     if (!match) return { type: 'other', account: null };
     const name = match[1].toLowerCase();
     if (NON_PROFILE.includes(name)) return { type: name, account: null };
@@ -128,16 +135,17 @@ async function checkPage() {
     return { ok: true, tab, account: 'home_feed' };
   }
 
-  if (page.type === 'search' || page.type === 'explore') {
+  if (page.type === 'search' || page.type === 'explore' || page.type === 'trending') {
+    const label = page.type === 'trending' ? 'Global Trending' : page.type.charAt(0).toUpperCase() + page.type.slice(1);
     scanMode = 'trend';
     accountInfo.style.display = 'flex';
-    accountName.textContent = page.type.charAt(0).toUpperCase() + page.type.slice(1);
+    accountName.textContent = label;
     accountType.textContent = 'Trends';
     accountType.className = 'account-type trend';
-    statusHint.textContent = 'Trend Scanner — find what\'s working in ' + page.type;
+    statusHint.textContent = 'Trend Scanner — find what\'s working in ' + label.toLowerCase();
     scrapeBtn.innerHTML = '<span class="btn-icon">◎</span> Scan Trends';
     scrapeBtn.classList.add('trend-mode');
-    return { ok: true, tab, account: page.type };
+    return { ok: true, tab, account: label.toLowerCase().replace(/\s+/g, '_') };
   }
 
   statusHint.textContent = 'Navigate to a profile for best results';
@@ -268,7 +276,10 @@ function exportCSV(data) {
 // ===== WEBHOOK (via background worker) =====
 function sendToWebhook(data, tab, scanKey) {
   setWebhookStatus('sending', 'Sent to pipeline — analyzing...');
-  const account = (tab?.url || '').match(/(?:twitter\.com|x\.com)\/([^/?]+)/)?.[1] || 'unknown';
+  // Extract account from scanKey (format: trend_account_timestamp or scan_account_timestamp)
+  const keyParts = scanKey.split('_');
+  const account = keyParts.length >= 3 ? keyParts.slice(1, -1).join('_') : 'unknown';
+  const accountUrl = scanMode === 'profile' ? 'https://x.com/' + account : tab?.url || '';
   chrome.runtime.sendMessage({
     action: 'analyzeWebhook',
     scanKey: scanKey,
@@ -276,7 +287,7 @@ function sendToWebhook(data, tab, scanKey) {
     data: {
       mode: scanMode,
       account: account,
-      account_url: 'https://x.com/' + account,
+      account_url: accountUrl,
       posts: data,
       scraped_at: new Date().toISOString()
     }
