@@ -1,0 +1,26 @@
+# ===== n8n workflows (contain credentials & secrets) =====
+files/
+files.zip
+
+# ===== Claude Code local settings =====
+.claude/
+
+# ===== Research papers (not part of extension) =====
+AIlearning/
+
+# ===== Old build scripts =====
+v2/
+
+# ===== OS / IDE =====
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# ===== Packed extension =====
+*.crx
+*.pem
+web-ext-artifacts/

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XRay</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">◉</span>
+        <span class="logo-text">XRay</span>
+      </div>
+      <span class="version">v1.2</span>
+    </header>
+
+    <div class="card status-card">
+      <div class="status-indicator" id="statusIndicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Ready to scan</span>
+      </div>
+      <p class="status-hint">Go to any Twitter/X profile</p>
+      <div class="account-info" id="accountInfo" style="display: none;">
+        <span class="account-name" id="accountName"></span>
+        <span class="account-type" id="accountType"></span>
+      </div>
+    </div>
+
+    <div class="card stats-card" id="statsCard" style="display: none;">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-value" id="postsCount">0</span>
+          <span class="stat-label">Posts</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="totalLikes">0</span>
+          <span class="stat-label">Likes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="totalViews">0</span>
+          <span class="stat-label">Views</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="webhook-status" id="webhookStatus" style="display: none;">
+      <span class="webhook-dot" id="webhookDot"></span>
+      <span class="webhook-text" id="webhookText"></span>
+    </div>
+
+    <div class="settings-panel" id="settingsPanel">
+      <div class="setting-row">
+        <span class="setting-label">Posts</span>
+        <div class="seg-group" id="postsGroup">
+          <button class="seg-btn" data-value="10">10</button>
+          <button class="seg-btn" data-value="25">25</button>
+          <button class="seg-btn active" data-value="50">50</button>
+          <button class="seg-btn" data-value="100">100</button>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label">Media</span>
+        <div class="seg-group" id="mediaGroup">
+          <button class="seg-btn active" data-value="all">All</button>
+          <button class="seg-btn" data-value="text">Text</button>
+          <button class="seg-btn" data-value="image">Image</button>
+          <button class="seg-btn" data-value="video">Video</button>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label">Webhook</span>
+        <div class="seg-group" id="webhookGroup">
+          <button class="seg-btn active" data-value="on">ON</button>
+          <button class="seg-btn" data-value="off">OFF</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="scrapeBtn">
+        <span class="btn-icon">⊙</span>
+        Scan Posts
+      </button>
+      <button class="btn btn-secondary" id="exportBtn" disabled>
+        Export CSV
+      </button>
+      <button class="btn btn-secondary" id="dashboardBtn">
+        Dashboard
+      </button>
+    </div>
+
+    <div class="progress-container" id="progressContainer" style="display: none;">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span class="progress-text" id="progressText">Scanning...</span>
+    </div>
+
+    <div class="last-scan" id="lastScan" style="display: none;">
+      <span class="last-scan-text" id="lastScanText"></span>
+    </div>
+
+    <footer class="footer">
+      <span>XRay Pipeline</span>
+      <span class="separator">·</span>
+      <span class="footer-link" id="settingsHint">n8n connected</span>
+    </footer>
+  </div>
+
+  <script src="../lib/metrics.js"></script>
+  <script src="../lib/trends.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

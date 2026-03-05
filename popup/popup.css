@@ -1,0 +1,70 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fafafa;color:#1a1a1a;width:320px;min-height:400px}
+.container{padding:20px;display:flex;flex-direction:column;gap:16px}
+.header{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:8px}
+.logo-icon{font-size:24px;color:#1a1a1a}
+.logo-text{font-size:20px;font-weight:700;letter-spacing:-0.5px}
+.version{font-size:11px;color:#999;background:#f0f0f0;padding:4px 8px;border-radius:20px}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04)}
+.status-card{text-align:center}
+.status-indicator{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px}
+.status-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite}
+.status-dot.scanning{background:#f59e0b}
+.status-dot.error{background:#ef4444;animation:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.status-text{font-size:14px;font-weight:600}
+.status-hint{font-size:12px;color:#888}
+
+.account-info{margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f0;display:flex;align-items:center;justify-content:center;gap:8px}
+.account-name{font-size:15px;font-weight:700;color:#1a1a1a}
+.account-type{font-size:11px;color:#888;background:#f0f0f0;padding:2px 8px;border-radius:10px}
+.account-type.warn{color:#b45309;background:#fef3c7}
+
+.stats-card{background:#1a1a1a;color:#fff}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center}
+.stat-item{display:flex;flex-direction:column;gap:4px}
+.stat-value{font-size:20px;font-weight:700}
+.stat-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.5px}
+
+.webhook-status{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:#f8f8f8;font-size:12px}
+.webhook-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.webhook-dot.sending{background:#f59e0b;animation:pulse 1s infinite}
+.webhook-dot.sent{background:#22c55e}
+.webhook-dot.error{background:#ef4444}
+.webhook-text{color:#666}
+
+.settings-panel{background:#fff;border-radius:12px;padding:12px 16px;border:1px solid #f0f0f0}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.setting-row+.setting-row{margin-top:8px}
+.setting-label{font-size:12px;font-weight:600;color:#888;min-width:44px}
+.seg-group{display:flex;gap:0;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden}
+.seg-btn{background:#fff;border:none;border-right:1px solid #e5e5e5;padding:6px 10px;font-size:11px;font-weight:600;cursor:pointer;color:#888;font-family:inherit;transition:all .15s ease}
+.seg-btn:last-child{border-right:none}
+.seg-btn:hover{background:#f5f5f5}
+.seg-btn.active{background:#1a1a1a;color:#fff}
+
+.actions{display:flex;flex-direction:column;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s ease;border:none}
+.btn-primary{background:#1a1a1a;color:#fff}
+.btn-primary:hover{background:#333;transform:translateY(-1px)}
+.btn-secondary{background:#fff;color:#1a1a1a;border:1.5px solid #e5e5e5}
+.btn-secondary:hover:not(:disabled){border-color:#1a1a1a}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-icon{font-size:16px}
+
+.progress-container{text-align:center}
+.progress-bar{height:4px;background:#e5e5e5;border-radius:2px;overflow:hidden;margin-bottom:8px}
+.progress-fill{height:100%;background:#1a1a1a;width:0;transition:width .3s ease}
+.progress-text{font-size:12px;color:#888}
+
+.last-scan{text-align:center;padding:4px 0}
+.last-scan-text{font-size:11px;color:#aaa}
+
+.footer{display:flex;justify-content:center;align-items:center;gap:8px;font-size:11px;color:#999;padding-top:8px}
+.footer-link{color:#1a1a1a;font-weight:500}
+.separator{color:#ddd}
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.account-type.trend{color:#1a1a1a;background:#e5e5e5;font-weight:600}
+.btn-primary.trend-mode{background:#333;border:1.5px solid #000}

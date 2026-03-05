@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "XRay",
+  "version": "1.2.0",
+  "description": "Scrape Twitter/X posts for content analysis",
+  "permissions": ["activeTab", "scripting", "storage", "notifications"],
+  "host_permissions": ["https://twitter.com/*", "https://x.com/*", "https://n8n.brainrot.marketing/*"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://x.com/*"],
+      "js": ["content/scraper.js"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
